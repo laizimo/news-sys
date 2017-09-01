@@ -9,23 +9,30 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    create_time: {
+        type: String,
+        required: true
+    },
+    level: {
+        type: Number,
+        required: true
     }
 });
 
-UserSchema.statics.find_by_name = function(username, cb){
+UserSchema.statics.findUsername = function(username, cb){
     return this.findOne({
         username: username
     }, cb);
-};
+}
 
-UserSchema.methods.is_exist = function(cb){
-    const query = {
-        username: this.username,
-        password: this.password
-    };
-
-    return this.model('UserModel').findOne(query, cb);
-};
+UserSchema.statics.isExistOne = function(username, email, cb){
+    return this.find({"$or": [{username: username}, {email: email}]}, cb);
+}
 
 const UserModel = mongoose.model('User', UserSchema);
 

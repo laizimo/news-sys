@@ -23,6 +23,10 @@
     "mongoose": "^4.11.9"
   },
   "devDependencies": {
-    "nodemon": "^1.8.1"
+    "ava": "^0.22.0",
+    "nodemon": "^1.11.0",
+    "sinon": "^3.2.1",
+    "superkoa": "^1.0.3",
+    "zombie": "^5.0.7"
   }
 }

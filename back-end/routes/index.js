@@ -6,7 +6,7 @@ router.get('/', async (ctx, next) => {
   })
 })
 
-router.get('/source', async (ctx, next) => {
+router.get('/sourc', async (ctx, next) => {
   ctx.body = 'koa2 string'
 })
 

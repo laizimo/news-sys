@@ -1,4 +1,4 @@
-require('../db.connect');
+require('../db/connect');
 
 const Source = require('../models/source');
 
@@ -11,6 +11,16 @@ function getSource(type){
     });
 }
 
+function getSearch(search){
+    return new Promise((resolve, reject) => {
+        Source.getSearch(search, (err, doc) => {
+            if(err) reject(err);
+            resolve(doc);
+        })
+    })
+}
+
 module.exports = {
-    getSource
+    getSource,
+    getSearch
 };

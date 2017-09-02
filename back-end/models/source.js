@@ -23,7 +23,11 @@ SourceSchema.statics.getType = function(type, cb){
     }
 };
 
+SourceSchema.statics.getSearch = function(search, cb){
+    return this.find({name: { "$in": [search] } }, cb);
+}
 
-const SourceModel = new SourceSchema();
+
+const SourceModel = mongoose.model('Source', SourceSchema);
 
 module.exports = SourceModel;

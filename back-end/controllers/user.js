@@ -25,8 +25,9 @@ const userControllers = {
             result.message = userCode.NOT_EXIST_USER_NAME;
         }
 
-        if(formData.source === 'form' && result.success === true){
+        if(result.success === true){
             let session = ctx.session;
+            console.log('success');
 
             session.isLogin = true;
             session.username = formData.username;

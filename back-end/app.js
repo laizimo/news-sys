@@ -5,9 +5,11 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const session = require('koa-session-minimal')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const source = require('./routes/source')
 
 // error handler
 onerror(app)
@@ -24,6 +26,10 @@ app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
 
+app.use(session({
+  key: 'session_id',
+}));
+
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
@@ -35,5 +41,6 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(source.routes(), source.allowedMethods())
 
 module.exports = app

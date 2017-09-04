@@ -26,19 +26,24 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 #app
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  flex: 1
 
   .container
     display: flex
     width : 100%
-    padding: 20px 100px
+    height: 100%
 
     .left-nav
       flex: 0 0 200px
+      border-right: 1px solid rgba(7, 17, 27 , 0.1)
+
+    .content
+      flex: 1
 </style>

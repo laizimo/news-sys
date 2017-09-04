@@ -3,37 +3,54 @@
         <div class="title">
             <md-icon>home</md-icon> 首页
         </div>
-        <ul class="list">
-            <li class="item">
-                <md-button><md-icon>airplay</md-icon>直播管理</md-button>
-            </li>
-            <li class="item">
-                <md-button><md-icon>subscriptions</md-icon>视频管理</md-button>
-            </li>
-            <!-- <li class="item">
-                <md-icon>video_library</md-icon>
-                <md-button>视频列表</md-button>
-            </li>
-            <li class="item">
-                <md-icon>playlist_play</md-icon>
-                <md-button>视频分类</md-button>
-            </li>
-            <li class="item">
-                <md-icon>source</md-icon>
-                <md-button>媒体来源</md-button>
-            </li> -->
-            <li class="item">
-                <md-button><md-icon>equalizer</md-icon>数据中心</md-button>
-            </li>
-            <li class="item">
-                <md-button><md-icon>computer</md-icon>系统管理</md-button>
-            </li>
-        </ul>
+        <md-list id="one-level">
+            <md-list-item href="#/" data-id="airplay">
+                <md-icon>airplay</md-icon><span>直播管理</span><md-icon>{{list.airplay ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</md-icon>
+            </md-list-item>
+            <md-list-item>
+                <md-icon>subscriptions</md-icon><span>视频管理</span>
+                <md-list-expand>
+                    <md-list class="two-level">
+                        <md-list-item>
+                            <router-link to="/video/list">
+                                <md-icon>video_library</md-icon><span>视频列表</span>
+                            </router-link>
+                        </md-list-item>
+                        <md-list-item>
+                            <router-link to="/video/classify">
+                                <md-icon>art_track</md-icon><span>视频分类</span>
+                            </router-link>
+                        </md-list-item>
+                        <md-list-item>
+                            <router-link to="/video/source">
+                                <md-icon>video_label</md-icon><span>媒体来源</span>
+                            </router-link>
+                        </md-list-item>
+                    </md-list>
+                </md-list-expand>
+            </md-list-item>
+            <md-list-item href="#/">
+                <md-icon>equalizer</md-icon><span>数据中心</span><md-icon>{{list.static ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</md-icon>
+            </md-list-item>
+            <md-list-item href="#/">
+                <md-icon>computer</md-icon><span>管理中心</span><md-icon>{{list.computer ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</md-icon>
+            </md-list-item>
+        </md-list>
     </nav>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      list: {
+        airplay: false,
+        video: false,
+        static: false,
+        computer: false
+      }
+    }
+  }
 }
 </script>
 
@@ -43,13 +60,23 @@ nav
     font-size: 14px
     .title
         font-size: 20px
+        width: 100%
+        height: 80px
+        padding-top: 20px
+        border-bottom: 1px solid rgba(7, 17, 27, 0.3)
 
-    .list
-        list-style: none
+    #one-level
+        .two-level
+            
+            .md-list-item.md-inset
+                
+                .md-list-item-container
+                    padding-left: 42px
+                    background: blue
 
-        .item
-            line-height: 48px
-
-            .md-icon
-                font-size: 20px
+                    .md-icon
+                        font-size: 24px
+                        margin-right: 10px
+                    span
+                        font-size:16px
 </style>

@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
+const pageSize = 10;
+
 const SourceSchema = new mongoose.Schema({
     id: {
-        type: String,
+        type: Number,
         required: true
     },
     name: {
@@ -15,13 +17,27 @@ const SourceSchema = new mongoose.Schema({
     }
 });
 
-SourceSchema.statics.getType = function(type, cb){
+SourceSchema.statics.getType = function(type, page, cb){
+    let query;
     if(type == 0){
-        return this.find({}, cb);
+        query = this.find({});
     }else{
-        return this.find({type: type}, cb);
+        query = this.find({type: type});
     }
+    query.skip((page - 1)*pageSize);
+    query.limit(pageSize);
+    query.exec(cb);
 };
+
+SourceSchema.statics.getPage = function(type, cb){
+    let query;
+    if(type == 0){
+        query = this.count({});
+    }else{
+        query = this.count({type: type});
+    }
+    query.exec(cb);
+}
 
 SourceSchema.statics.getSearch = function(search, cb){
     return this.find({name: { "$in": [search] } }, cb);

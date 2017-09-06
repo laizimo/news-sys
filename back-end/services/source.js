@@ -2,11 +2,28 @@ require('../db/connect');
 
 const Source = require('../models/source');
 
-function getSource(type){
+const pageSize = 10;
+
+function getSource(type, page){
     return new Promise((resolve, reject) => {
-        Source.getType(type, (err, doc) => {
+        Source.getType(type, page, (err, doc) => {
             if(err) reject(err);
-            resolve(doc);
+            if(doc){
+                resolve(doc);
+            }
+        });
+    });
+}
+
+function getPage(type){
+    return new Promise((resolve, reject) => {
+        Source.getPage(type, (err, doc) => {
+            if(err) reject(err);
+            if(doc){
+                let count = doc / pageSize;
+                count = Math.ceil(count);
+                resolve(count);
+            }
         });
     });
 }
@@ -16,11 +33,12 @@ function getSearch(search){
         Source.getSearch(search, (err, doc) => {
             if(err) reject(err);
             resolve(doc);
-        })
-    })
+        });
+    });
 }
 
 module.exports = {
     getSource,
-    getSearch
+    getSearch,
+    getPage
 };

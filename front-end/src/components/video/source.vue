@@ -19,16 +19,42 @@
                     <md-button>搜索</md-button>
               </div>
           </header>
+          <div class="content">
+            <v-source-table :items="data"></v-source-table>
+          </div>
+          <footer>
+            <v-pagination :count="count" :current="currentPage"></v-pagination>
+          </footer>
       </div>
   </div>
 </template>
 
 <script>
+
+import SourceTable from './source-table.vue'
+import Pagination from '../pagination.vue'
+
 export default {
   data () {
     return {
-      type: 0
+      type: 0,
+      data: [
+        {
+          id: 1011,
+          name: '浙江新闻'
+        },
+        {
+          id: 1211,
+          name: 'hello新闻'
+        }
+      ],
+      count: 10,
+      currentPage: 1
     }
+  },
+  components: {
+    'v-source-table': SourceTable,
+    'v-pagination': Pagination
   }
 }
 </script>
@@ -40,7 +66,6 @@ export default {
     .container
       border: 1px solid rgba(7, 17, 27, 0.1)
       width: 100%
-      height: 800px
 
       header
         text-align: left

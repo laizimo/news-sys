@@ -11,7 +11,7 @@
           </md-table-header>
           <md-table-body>
               <md-table-row v-for="(item, index) in items" :key="item.id">
-                  <md-table-cell md-numeric>{{index}}</md-table-cell>
+                  <md-table-cell md-numeric>{{index + 1}}</md-table-cell>
                   <md-table-cell md-numeric>{{item.id}}</md-table-cell>
                   <md-table-cell md-numeric>{{item.name}}</md-table-cell>
                   <md-table-cell md-numeric width="100px">

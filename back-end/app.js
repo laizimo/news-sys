@@ -6,6 +6,7 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const session = require('koa-session-minimal')
+const cors = require('koa-cors')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -28,7 +29,9 @@ app.use(views(__dirname + '/views', {
 
 app.use(session({
   key: 'session_id',
-}));
+}))
+
+app.use(cors())
 
 // logger
 app.use(async (ctx, next) => {

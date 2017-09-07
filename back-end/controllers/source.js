@@ -18,7 +18,7 @@ module.exports = {
             result.success = true;
             result.data = data;
             result.count = count;
-            result.currentpage = page;
+            result.currentpage = parseInt(page);
             ctx.body = result;
         }else{
             ctx.body = result;
@@ -42,7 +42,7 @@ module.exports = {
             result.success = true;
             result.data = data;
             result.count = count;
-            result.currentpage = page;
+            result.currentpage = parseInt(page);
         }
         ctx.body = result;
     },

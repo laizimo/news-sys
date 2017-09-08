@@ -2,7 +2,7 @@
   <div class="source">
       <div class="container">
           <header>
-              <md-button class="md-raised">新建</md-button>
+              <md-button class="md-raised" @click="insertShow">新建</md-button>
               <div class="header-right">
                     <md-input-container>
                         <label>keywords</label>
@@ -25,6 +25,35 @@
           <footer>
             <v-pagination :count="count" @update="updateFun" :currentPage="currentPage" @prev="prevFun" @next="nextFun"></v-pagination>
           </footer>
+          <div class="insert" v-show="insert">
+            <div class="insert-content">
+              <form novalidate>
+                <md-input-container>
+                  <label>ID:</label>
+                  <md-input v-model="source.id"></md-input>
+                </md-input-container>
+                <md-input-container>
+                  <label>名称：</label>
+                  <md-input v-model="source.name"></md-input>
+                </md-input-container>
+                <md-input-container>
+                  <label for="type">类型</label>
+                  <md-select name="type" v-model="source.type">
+                    <md-option value=1>
+                      类型1
+                    </md-option>
+                    <md-option value=2>
+                      类型2
+                    </md-option>
+                  </md-select>
+                </md-input-container>
+              </form>
+              <div class="btn-group">
+                <md-button class="md-raised" @click="submitInsert">确认</md-button>
+                <md-button class="md-raised" @click="insertHide">取消</md-button>
+              </div>
+            </div>
+          </div>
       </div>
   </div>
 </template>
@@ -42,7 +71,13 @@ export default {
       type: 0,
       data: null,
       count: 0,
-      currentPage: 1
+      currentPage: 1,
+      insert: false,
+      source: {
+        id: '',
+        name: '',
+        type: 0
+      }
     }
   },
   components: {
@@ -87,6 +122,32 @@ export default {
       }, err => {
         console.log(err)
       })
+    },
+    reduce: function () {
+      this.source.id = ''
+      this.source.name = ''
+      this.source.type = 0
+    },
+    insertShow: function () {
+      this.insert = true
+    },
+    insertHide: function () {
+      this.insert = false
+      this.reduce()
+    },
+    submitInsert: function () {
+      const url = base.url + '/source/insert'
+      axios.post(url, this.source).then((val) => {
+        if (val.data.success) {
+          this.insert = false
+          this.reduce()
+          console.log('success')
+        } else {
+          console.log('fail')
+        }
+      }, (err) => {
+        console.log(err)
+      })
     }
   },
 
@@ -123,6 +184,26 @@ export default {
           .md-input-container
             display: inline-flex
             width: 200px
-        
+
+      .insert
+        position: absolute
+        width: 100%
+        height: 100%
+        top: 0
+        left: 0
+        background: rgba(0, 0, 0, 0.5)
+        z-index: 2
+
+        .insert-content
+          width: 400px
+          height 300px
+          position: absolute
+          left: 50%
+          top: 50%
+          margin-left: -200px
+          margin-top: -150px
+          background: #f3f5f7
+          padding: 20px 50px
+          box-sizing: border-box  
 </style>
 

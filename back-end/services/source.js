@@ -37,8 +37,19 @@ function getSearch(search){
     });
 }
 
+function insertSource(source){
+    const model = new Source(source);
+    return new Promise((resolve, reject) => {
+        model.save((err, doc) => {
+            if(err) reject(err);
+            resolve(doc);
+        });
+    });
+}
+
 module.exports = {
     getSource,
     getSearch,
-    getPage
+    getPage,
+    insertSource
 };

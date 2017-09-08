@@ -63,5 +63,21 @@ module.exports = {
             result.data = data;
         }
         ctx.body = result;
+    },
+    insert: async (ctx) => {
+        let param = ctx.request.body;
+        let result = {
+            success: false,
+            data: null
+        };
+
+        let data = await source.insertSource(param);
+
+        if(data) {
+            result.success = true,
+            result.data = 'success'
+        };
+
+        ctx.body = result;
     }
 };

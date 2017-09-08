@@ -39,6 +39,7 @@ export default {
     display: flex
     width : 100%
     height: 100%
+    position: relative
 
     .left-nav
       flex: 0 0 200px

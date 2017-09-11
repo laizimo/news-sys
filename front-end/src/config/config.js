@@ -1,5 +1,5 @@
 const base = {
-  url: 'http://localhost:3000'
+  url: 'http://www.lhbzimo.cn:4000'
 }
 
 export default base

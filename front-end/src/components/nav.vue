@@ -5,7 +5,7 @@
         </div>
         <md-list id="one-level">
             <md-list-item href="#/" data-id="airplay">
-                <md-icon>airplay</md-icon><span>直播管理</span><md-icon>{{list.airplay ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</md-icon>
+                <md-icon>airplay</md-icon><span>直播管理</span></md-icon>
             </md-list-item>
             <md-list-item>
                 <md-icon>subscriptions</md-icon><span>视频管理</span>
@@ -30,10 +30,10 @@
                 </md-list-expand>
             </md-list-item>
             <md-list-item href="#/">
-                <md-icon>equalizer</md-icon><span>数据中心</span><md-icon>{{list.static ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</md-icon>
+                <md-icon>equalizer</md-icon><span>数据中心</span>
             </md-list-item>
             <md-list-item href="#/">
-                <md-icon>computer</md-icon><span>管理中心</span><md-icon>{{list.computer ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</md-icon>
+                <md-icon>computer</md-icon><span>管理中心</span>
             </md-list-item>
         </md-list>
     </nav>
